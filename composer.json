@@ -1,0 +1,28 @@
+{
+  "name": "drupal/webapi_starter",
+  "description": "The basic Drupal API site template: JSON:API served from /api with OAuth 2.0 and Swagger UI documentation, on the standard Drupal content model.",
+  "type": "drupal-recipe",
+  "homepage": "https://www.drupal.org/project/webapi_starter",
+  "license": "GPL-2.0-or-later",
+  "authors": [
+    {
+      "name": "Webship",
+      "homepage": "https://webship.co",
+      "role": "Maintainer"
+    }
+  ],
+  "support": {
+    "issues": "https://www.drupal.org/project/issues/webapi_starter",
+    "source": "http://cgit.drupalcode.org/webapi_starter"
+  },
+  "repositories": {
+    "drupal": {
+      "type": "composer",
+      "url": "https://packages.drupal.org/8"
+    }
+  },
+  "require": {
+    "drupal/core": "^11.4 || ^12",
+    "drupal/webapi": "^1"
+  }
+}

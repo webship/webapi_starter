@@ -1,0 +1,42 @@
+################
+# GitLab CI for a Webship site template (a Composer "drupal-recipe" package).
+#
+# A recipe ships no PHP and no front-end assets, so the pipeline only validates
+# composer.json and the recipe file itself.
+# Documentation: https://project.pages.drupalcode.org/gitlab_templates/
+################
+include:
+  - project: $_GITLAB_TEMPLATES_REPO
+    ref: $_GITLAB_TEMPLATES_REF
+    file:
+      - "/includes/include.drupalci.variables.yml"
+      - "/includes/include.drupalci.workflows.yml"
+
+variables:
+  _TARGET_PHP: "8.4"
+  DRUPAL_CORE: "11.4.x-dev"
+  COMPOSER_NO_INTERACTION: "1"
+
+default:
+  image: $_CONFIG_DOCKERHUB_ROOT/php-$_TARGET_PHP-$_TARGET_PHP_IMAGE_VARIANT:$_TARGET_PHP_IMAGE_TAG
+  interruptible: true
+
+stages:
+  - validate
+
+composer validate:
+  stage: validate
+  script:
+    - composer --version
+    # The Webship packages use exact x-dev versions on purpose, so no --strict.
+    - composer validate
+
+# The recipe must declare a name, a description and a type.
+recipe:
+  stage: validate
+  script:
+    - test -f recipe.yml
+    - grep -q "^name:" recipe.yml
+    - grep -q "^description:" recipe.yml
+    - grep -q "^type:" recipe.yml
+    - echo "recipe.yml declares a name, a description and a type"

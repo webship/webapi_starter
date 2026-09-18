@@ -1,0 +1,36 @@
+name: 'WebAPI Starter'
+description: 'The basic Drupal API site template: JSON:API served from /api with OAuth 2.0 and Swagger UI documentation, on the standard Drupal content model. The Drupal core administration theme is used for the back end and the front end.'
+type: 'Site'
+# Site template metadata for the Webships installer.
+extra:
+  webship_installer:
+    creator: 'Webship'
+    links:
+      - text: 'Learn more'
+        url: 'https://www.drupal.org/project/webapi_starter'
+recipes:
+  # The standard Drupal content model: page and article, roles, editor.
+  - core/recipes/standard
+  # Web API: JSON:API from /api, read-only, with OAuth 2.0 and Swagger UI.
+  - modules/contrib/webapi/recipes/default
+install:
+  # The Drupal core administration theme, used for the whole site.
+  - default_admin
+config:
+  strict: false
+  actions:
+    system.theme:
+      simpleConfigUpdate:
+        default: default_admin
+        admin: default_admin
+    node.settings:
+      simpleConfigUpdate:
+        # Edit and add content in the administration theme.
+        use_admin_theme: true
+    system.site:
+      simpleConfigUpdate:
+        slogan: 'A Drupal API, documented and ready to use'
+    user.settings:
+      simpleConfigUpdate:
+        # An API site does not take public registrations.
+        register: admin_only
