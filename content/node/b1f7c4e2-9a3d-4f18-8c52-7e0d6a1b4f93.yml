@@ -1,0 +1,42 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: b1f7c4e2-9a3d-4f18-8c52-7e0d6a1b4f93
+  bundle: webpage
+  default_langcode: en
+default:
+  revision_uid:
+  - target_id: 1
+  status:
+  - value: true
+  uid:
+  - target_id: 1
+  title:
+  - value: The API and its documentation
+  promote:
+  - value: false
+  sticky:
+  - value: false
+  moderation_state:
+  - value: published
+  path:
+  - alias: /api-and-docs
+    langcode: en
+    pathauto: 0
+  body:
+  - value: "<p>This site serves its content over JSON:API from the <code>/api</code> prefix.\nThe API\
+      \ is read only: it answers GET requests, and nothing can be written through it\nunless the site\
+      \ owner decides otherwise.</p>\n\n<h2>Where to start</h2>\n<p><a href=\"/api\">/api</a> is the resource\
+      \ list. It names every resource this site\nserves, with a link to each one, so a client can discover\
+      \ the API without knowing\nanything in advance.</p>\n<p>Every content type you add to this site\
+      \ appears there. A site with an Article type,\nfor example, serves it at <code>/api/node/article</code>.</p>\n\
+      \n<h2>Reading the API</h2>\n<p>Filtering, sorting and paging follow the JSON:API specification:</p>\n\
+      <ul>\n  <li><code>?sort=title</code> orders a collection.</li>\n  <li><code>?page[limit]=10</code>\
+      \ limits it.</li>\n  <li><code>?filter[status]=1</code> narrows it.</li>\n</ul>\n\n<h2>Documentation</h2>\n\
+      <p>Swagger UI documentation is generated from the API itself. It lives in the\nadministration area,\
+      \ under <em>Configuration &rarr; Web services &rarr; OpenAPI</em>,\nand needs the <em>access openapi\
+      \ api docs</em> permission. Sign in as an administrator\nto read it.</p>\n\n<h2>Authentication</h2>\n\
+      <p>Reading needs no account. OAuth 2.0 is configured for the cases that do need an\nidentity, through\
+      \ consumers registered by the site owner.</p>"
+    format: full_html
+    summary: ''
