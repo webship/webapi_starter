@@ -13,6 +13,9 @@ recipes:
   # workflow. The page this template ships is a webpage node rendered
   # through Display Builder.
   - modules/contrib/webpage/recipes/default
+  # Tags first: core's standard recipe grants the content editor role
+  # permissions on the tags vocabulary, so the vocabulary has to exist.
+  - core/recipes/tags_taxonomy
   # The standard Drupal content model: page and article, roles, editor.
   - core/recipes/standard
   # Web API: JSON:API from /api, read-only, with OAuth 2.0 and Swagger UI.
