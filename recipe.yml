@@ -20,12 +20,29 @@ recipes:
   - core/recipes/standard
   # Web API: JSON:API from /api, read-only, with OAuth 2.0 and Swagger UI.
   - modules/contrib/webapi/recipes/default
+  # The default dashboards, built with Display Builder: Webmaster for site
+  # administrators, Editorial for content editors.
+  - webdash
 install:
   # The Drupal core administration theme, used for the whole site.
   - default_admin
 config:
   strict: false
   actions:
+    # Content editors write and publish through the editorial workflow.
+    user.role.content_editor:
+      grantPermissions:
+        - 'use editorial transition archive'
+        - 'use editorial transition archived_draft'
+        - 'use editorial transition archived_published'
+        - 'use editorial transition create_new_draft'
+        - 'use editorial transition publish'
+        - 'view latest version'
+      grantPermissionsForEachNodeType:
+        - 'create %bundle content'
+        - 'delete %bundle revisions'
+        - 'delete own %bundle content'
+        - 'edit own %bundle content'
     system.theme:
       simpleConfigUpdate:
         default: default_admin

@@ -23,6 +23,7 @@
   },
   "require": {
     "drupal/core": "^11.4 || ^12",
-    "drupal/webapi": "^1"
+    "drupal/webapi": "^1",
+    "drupal/webdash": "^1.0"
   }
 }
