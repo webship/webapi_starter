@@ -29,7 +29,7 @@ into `settings.php`: DDEV owns the database connection.
 ## Test
 
 ```shell
-ddev drush si -y webships installer_site_template_form.add_ons=webapi_starter
+ddev drush site:install ../recipes/webapi_starter -y
 ddev drush config:get jsonapi.settings read_only
 ddev drush config:get system.theme
 ```
