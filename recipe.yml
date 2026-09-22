@@ -28,6 +28,11 @@ install:
   - default_admin
 config:
   strict: false
+  import:
+    # The block placements of the Drupal core administration theme are
+    # optional configuration, which a recipe does not install on its own:
+    # without them the site shows no page title and no status messages.
+    default_admin: '*'
   actions:
     # Content editors write and publish through the editorial workflow.
     user.role.content_editor:
