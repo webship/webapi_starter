@@ -1,0 +1,29 @@
+{
+  "name": "webapi_starter",
+  "private": true,
+  "description": "WebAPI Starter: the basic Drupal API site template, a documented and read-only JSON:API.",
+  "license": "GPL-2.0-or-later",
+  "engines": {
+    "yarn": ">= 4.9.3",
+    "node": ">= 20.0"
+  },
+  "packageManager": "yarn@4.9.3",
+  "keywords": [
+    "Drupal",
+    "Recipe",
+    "JSON:API",
+    "OpenAPI"
+  ],
+  "author": "Webship.co",
+  "scripts": {
+    "test": "cucumber-js --config cucumber.js",
+    "test:headed": "HEADLESS=false cucumber-js --config cucumber.js",
+    "test:chromium": "BROWSER=chromium cucumber-js --config cucumber.js"
+  },
+  "devDependencies": {
+    "webship-js": "~2.0"
+  },
+  "resolutions": {
+    "@cucumber/cucumber": "10.0.1"
+  }
+}
