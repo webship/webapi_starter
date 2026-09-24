@@ -23,9 +23,9 @@
   },
   "require": {
     "drupal/core": "^11.4 || ^12",
-    "drupal/webapi": "^1",
-    "drupal/webdash": "^1.0",
-    "drupal/webpage": "^12.0"
+    "drupal/webapi": "~1.0",
+    "drupal/webdash": "~1.0",
+    "drupal/webpage": "~12.0"
   },
   "require-dev": {
     "vardot/swagger-ui": "^5.32"
