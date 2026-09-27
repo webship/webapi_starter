@@ -23,6 +23,8 @@
   },
   "require": {
     "drupal/core": "^11.4 || ^12",
+    "drupal/ui_suite_uikit": "^1.0",
+    "drupal/uikit_admin": "~4.0",
     "drupal/webapi": "~1.0",
     "drupal/webdash": "~1.0",
     "drupal/webpage": "~12.0"

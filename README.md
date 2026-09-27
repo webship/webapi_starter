@@ -24,7 +24,7 @@ small editorial content model.
   editor roles.
 - Webmaster, Editorial and Management dashboards.
 - A front page, `/api-and-docs`, that explains the API.
-- The Drupal core administration theme for the back end and the front end.
+- The UIkit themes: UI Suite UIkit for the site, UIkit Admin for the back office.
 - Registration is closed: an administrator creates the accounts.
 
 

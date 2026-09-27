@@ -9,7 +9,7 @@ include:
 variables:
   # Build and test with Drupal 11.4 and PHP 8.4: Display Builder, which
   # Webpage and Web Dashboard use, supports Drupal 11.4.
-  DRUPAL_CORE: "11.4.x-dev"
+  DRUPAL_CORE: "11.4.8"
   _TARGET_PHP: "8.4"
   COMPOSER_NO_INTERACTION: "1"
   COMPOSER_MEMORY_LIMIT: "-1"
@@ -20,6 +20,12 @@ composer validate:
     - composer --version
     # The Webship packages use exact x-dev versions on purpose, so no --strict.
     - composer validate
+
+# Drupal 11.4.8 carries the fix for the Twig 3.30 escape TypeError
+# (https://www.drupal.org/i/3625969), which 11.4.6 does not.
+composer:
+  variables:
+    DRUPAL_CORE: "11.4.8"
 
 # The recipe must declare a name, a description and a type.
 recipe:
@@ -135,6 +141,10 @@ stylelint:
         -y
     - $CI_PROJECT_DIR/vendor/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT recipe $CI_PROJECT_DIR/recipes/webapi_starter
     - $CI_PROJECT_DIR/vendor/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT cache:rebuild
+    # The UIkit themes: UI Suite UIkit for the site, UIkit Admin for the back
+    # office.
+    - test "$($CI_PROJECT_DIR/vendor/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT config:get system.theme default --format=string)" = "ui_suite_uikit"
+    - test "$($CI_PROJECT_DIR/vendor/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT config:get system.theme admin --format=string)" = "uikit_admin"
     # Per-role test users are provisioned by the first scenario in the suite
     # (01-01-01-users-login.feature, "Webmaster can log in and provision
     # testing users"), so no separate drush step is needed here.

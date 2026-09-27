@@ -13,8 +13,8 @@ Workspace (`~/workspace/products`): DDEV only.
 - Only packages from drupal.org. The Swagger UI asset library belongs to the
   project template, where `installer-paths` works.
 - JSON:API stays read-only. Never set `read_only: false` here.
-- The Drupal core administration theme is the default theme, for the back end
-  and the front end.
+- UI Suite UIkit is the default theme and UIkit Admin the administration theme,
+  with their block placements.
 
 ## Build and test with DDEV
 

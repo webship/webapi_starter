@@ -1,5 +1,5 @@
 name: 'WebAPI Starter'
-description: 'The basic Drupal API site template: JSON:API served from /api with OAuth 2.0 and Swagger UI documentation, on the standard Drupal content model. The Drupal core administration theme is used for the back end and the front end.'
+description: 'The basic Drupal API site template: JSON:API served from /api with OAuth 2.0 and Swagger UI documentation, on the standard Drupal content model. UI Suite UIkit is used for the site and UIkit Admin for the back office.'
 type: 'Site'
 # Site template metadata for the Webships installer.
 extra:
@@ -24,16 +24,78 @@ recipes:
   # administrators, Editorial for content editors.
   - webdash
 install:
-  # The Drupal core administration theme, used for the whole site.
-  - default_admin
+  # The UIkit themes: UI Suite UIkit for the site, UIkit Admin for the back
+  # office. UI Suite UIkit needs the UI Suite modules.
+  - ui_patterns
+  - ui_skins
+  - ui_styles
+  - ui_icons
+  - ui_icons_patterns
+  - ui_suite_uikit
+  - uikit_admin
 config:
   strict: false
   import:
-    # The block placements of the Drupal core administration theme are
-    # optional configuration, which a recipe does not install on its own:
-    # without them the site shows no page title and no status messages.
-    default_admin: '*'
+    # The block placements of the themes are optional configuration, which a
+    # recipe does not install on its own: without them the pages show no
+    # title, no tabs and no status messages.
+    ui_suite_uikit:
+      - block.block.ui_suite_uikit_account_menu
+      - block.block.ui_suite_uikit_breadcrumbs
+      - block.block.ui_suite_uikit_content
+      - block.block.ui_suite_uikit_footer_menu
+      - block.block.ui_suite_uikit_help
+      - block.block.ui_suite_uikit_messages
+      - block.block.ui_suite_uikit_page_title
+      - block.block.ui_suite_uikit_powered
+      - block.block.ui_suite_uikit_primary_admin_actions
+      - block.block.ui_suite_uikit_primary_local_tasks
+      - block.block.ui_suite_uikit_secondary_local_tasks
+      - block.block.ui_suite_uikit_site_branding
+    uikit_admin:
+      - block.block.uikit_admin_branding
+      - block.block.uikit_admin_breadcrumbs
+      - block.block.uikit_admin_content
+      - block.block.uikit_admin_help
+      - block.block.uikit_admin_local_actions
+      - block.block.uikit_admin_messages
+      - block.block.uikit_admin_page_title
+      - block.block.uikit_admin_primary_local_tasks
+      - block.block.uikit_admin_secondary_local_tasks
   actions:
+    # The main menu, in the navbar and in the offcanvas. Created here with an
+    # unlimited depth: the theme ships it with a depth of 0, which fails
+    # validation when the recipe is applied to an existing site.
+    block.block.ui_suite_uikit_main_menu:
+      createIfNotExists:
+        theme: ui_suite_uikit
+        region: navbar_center
+        weight: 0
+        plugin: 'system_menu_block:main'
+        settings:
+          id: 'system_menu_block:main'
+          label: 'Main navigation'
+          label_display: '0'
+          provider: system
+          level: 1
+          depth: null
+          expand_all_items: true
+        visibility: {  }
+    block.block.ui_suite_uikit_main_menu_offcanvas:
+      createIfNotExists:
+        theme: ui_suite_uikit
+        region: offcanvas
+        weight: 0
+        plugin: 'system_menu_block:main'
+        settings:
+          id: 'system_menu_block:main'
+          label: 'Main navigation'
+          label_display: '0'
+          provider: system
+          level: 1
+          depth: null
+          expand_all_items: true
+        visibility: {  }
     # Content editors write and publish through the editorial workflow.
     user.role.content_editor:
       grantPermissions:
@@ -50,8 +112,8 @@ config:
         - 'edit own %bundle content'
     system.theme:
       simpleConfigUpdate:
-        default: default_admin
-        admin: default_admin
+        default: ui_suite_uikit
+        admin: uikit_admin
     node.settings:
       simpleConfigUpdate:
         # Edit and add content in the administration theme.
