@@ -23,7 +23,7 @@ default:
   - alias: /api-and-docs
     langcode: en
     pathauto: 0
-  body:
+  field_body:
   - value: "<p>This site serves its content over JSON:API from the <code>/api</code> prefix.\nThe API\
       \ is read only: it answers GET requests, and nothing can be written through it\nunless the site\
       \ owner decides otherwise.</p>\n\n<h2>Where to start</h2>\n<p><a href=\"/api\">/api</a> is the resource\
@@ -39,4 +39,3 @@ default:
       <p>Reading needs no account. OAuth 2.0 is configured for the cases that do need an\nidentity, through\
       \ consumers registered by the site owner.</p>"
     format: full_html
-    summary: ''
