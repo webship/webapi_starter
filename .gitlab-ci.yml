@@ -7,6 +7,9 @@ include:
       - "/includes/include.drupalci.workflows.yml"
 
 variables:
+  # No yarn.lock is committed; Yarn 4 defaults to immutable installs and would
+  # refuse to create one. Allow lockfile creation in CI for every job.
+  YARN_ENABLE_IMMUTABLE_INSTALLS: "false"
   # Build and test with Drupal 11.4 and PHP 8.4: Display Builder, which
   # Webpage and Web Dashboard use, supports Drupal 11.4.
   DRUPAL_CORE: "11.4.8"
@@ -37,9 +40,15 @@ recipe:
     - grep -q "^type:" recipe.yml
     - echo "recipe.yml declares a name, a description and a type"
 
+.composer-base:
+  variables:
+    # Drupal core's own Yarn 4.9.1 would read the project .yarnrc.yml (Yarn >= 4.14 keys) too.
+    YARN_RC_FILENAME: .yarnrc.core.yml
+    YARN_NODE_LINKER: node-modules
+
 cspell:
   stage: validate
-  image: node:20
+  image: node:24
   before_script:
     - npm install -g cspell
   script:
@@ -57,7 +66,7 @@ cspell:
 # The paired .eslintignore excludes vendor/, .yarn/, web/ and node_modules/ so
 # `eslint .` only lints the recipe's own files.
 .lint-node:
-  image: node:20
+  image: node:24
   dependencies: []
   variables:
     LINT_TOOLS_DIR: /tmp/lint-tools
@@ -148,8 +157,8 @@ stylelint:
     # Per-role test users are provisioned by the first scenario in the suite
     # (01-01-01-users-login.feature, "Webmaster can log in and provision
     # testing users"), so no separate drush step is needed here.
-    # Node.js 20.
-    - curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
+    # Node.js 24.
+    - curl -fsSL https://deb.nodesource.com/setup_24.x | bash -
     - apt-get install -y nodejs
     - node --version && npm --version
     # Yarn deps + Playwright Chromium.
