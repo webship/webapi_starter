@@ -12,7 +12,7 @@ variables:
   YARN_ENABLE_IMMUTABLE_INSTALLS: "false"
   # Build and test with Drupal 11.4 and PHP 8.4: Display Builder, which
   # Webpage and Web Dashboard use, supports Drupal 11.4.
-  DRUPAL_CORE: "11.4.8"
+  DRUPAL_CORE: "11.4.x-dev"
   _TARGET_PHP: "8.4"
   COMPOSER_NO_INTERACTION: "1"
   COMPOSER_MEMORY_LIMIT: "-1"
@@ -28,7 +28,7 @@ composer validate:
 # (https://www.drupal.org/i/3625969), which 11.4.6 does not.
 composer:
   variables:
-    DRUPAL_CORE: "11.4.8"
+    DRUPAL_CORE: "11.4.x-dev"
 
 # The recipe must declare a name, a description and a type.
 recipe:
@@ -177,6 +177,7 @@ stylelint:
 webship-js-test:
   extends: .drupal-node-base
   script:
+    - ./node_modules/.bin/cucumber-js --config cucumber.js --dry-run
     - ./node_modules/.bin/cucumber-js --config cucumber.js --tags "not @wip"
   artifacts:
     when: always
