@@ -5,16 +5,14 @@ Feature: The WebAPI Starter recipe applies
 
   Scenario: Web API and its modules are enabled
     Given I am a logged in user with the "Webmaster" user
-     When I navigate to "/admin/modules"
-     Then the element "#edit-modules-webapi-enable" with the attribute "checked" and the value "checked" should exist
-      And the element "#edit-modules-jsonapi-enable" with the attribute "checked" and the value "checked" should exist
-      And the element "#edit-modules-simple-oauth-enable" with the attribute "checked" and the value "checked" should exist
-      And the element "#edit-modules-openapi-ui-swagger-enable" with the attribute "checked" and the value "checked" should exist
+     Then the "webapi" module should be installed
+      And the "jsonapi" module should be installed
+      And the "simple_oauth" module should be installed
+      And the "openapi_ui_swagger" module should be installed
 
   Scenario: The Webpage content type exists
     Given I am a logged in user with the "Webmaster" user
-     When I navigate to "/admin/structure/types"
-     Then I should see "Webpage"
+     Then the "Webpage" content type should exist
 
   Scenario: The page about the API is published
     Given I am an anonymous user

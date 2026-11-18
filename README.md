@@ -40,9 +40,10 @@ Display Builder is a beta release, so the project needs
 
 Swagger UI needs its library at `web/libraries/swagger-ui`. Web API
 requires `swagger-api/swagger-ui`, a plain Composer `library` that lands in
-`vendor/`. Require [vardot/swagger-ui](https://github.com/Vardot/swagger-ui)
-in the project: it replaces that package as a `drupal-library`, so the
-usual `type:drupal-library` installer path puts it in place.
+`vendor/`. Require a `drupal-library` package of Swagger UI that replaces it,
+as the `require-dev` of this project does, so the usual
+`type:drupal-library` installer path puts it in place. The Webships Project
+template brings the library.
 
 
 ## Installation
@@ -55,10 +56,11 @@ ddev composer create-project drupal/webships_project:^1.0
 ddev drush site:install ../recipes/webapi_starter -y --account-name=webmaster
 ```
 
-Or on an existing site:
+Or on an existing site, with the Swagger UI library of the requirements
+above:
 
 ```
-ddev composer require drupal/webapi_starter vardot/swagger-ui
+ddev composer require drupal/webapi_starter
 ddev drush recipe ../recipes/webapi_starter
 ```
 

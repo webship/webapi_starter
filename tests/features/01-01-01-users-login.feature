@@ -1,23 +1,19 @@
 Feature: Login for every configured user
   As a site administrator
-  I want every user defined in cucumber.js worldParameters.users to be
-  able to log in
-  So that the suite has known-good fixtures for every role of the site
-  template before any role-specific scenarios run
+  I want every account in cucumber.js worldParameters.users to log in
+  So that the scenarios have known-good accounts
 
-  Scenario: Webmaster can log in and provision the rest of the testing users
+  The site build creates the accounts (tests/README.md): the suite only logs
+  in, it never creates or deletes an account.
+
+  Scenario: Webmaster can log in
     Given I am a logged in user with the "Webmaster" user
-     When I add testing users
-      And I navigate to "/admin/people"
-     Then I should see "content_editor_user"
-      And I should see "authenticated_user"
+     Then I should be logged in
 
   Scenario: Content editor can log in
     Given I am a logged in user with the "Content editor" user
-     When I navigate to "/user"
-     Then I should see "content_editor_user"
+     Then I should be logged in
 
   Scenario: Authenticated user can log in
     Given I am a logged in user with the "Authenticated user" user
-     When I navigate to "/user"
-     Then I should see "authenticated_user"
+     Then I should be logged in
