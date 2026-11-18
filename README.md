@@ -23,7 +23,7 @@ small editorial content model.
 - The core standard recipe: text formats, the administrator and content
   editor roles.
 - Webmaster, Editorial and Management dashboards.
-- A front page, `/api-and-docs`, that explains the API.
+- A page, `/api-and-docs`, that explains the API.
 - The UIkit themes: UI Suite UIkit for the site, UIkit Admin for the back office.
 - Registration is closed: an administrator creates the accounts.
 
@@ -49,12 +49,19 @@ template brings the library.
 ## Installation
 
 With the [Webships Project](https://www.drupal.org/project/webships_project)
-template:
+template, in a new DDEV project:
 
 ```
-ddev composer create-project drupal/webships_project:^1.0
+mkdir my-api && cd my-api
+ddev config --project-type=drupal --docroot=web
+ddev start
+ddev composer create-project drupal/webships_project:~12.0
+ddev restart
 ddev drush site:install ../recipes/webapi_starter -y --account-name=webmaster
 ```
+
+`ddev restart` picks up the `.ddev/config.yaml` the template ships. The path of
+the site template is relative to the Drupal root.
 
 Or on an existing site, with the Swagger UI library of the requirements
 above:
